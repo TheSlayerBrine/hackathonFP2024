@@ -13,7 +13,7 @@ public class TimeCapsuleService : ITimeCapsuleService
         this.unitOfWork = unitOfWork;
     }
     
-    public TimeCapsuleDto GetTimeCapsule(int id)
+    public TimeCapsuleDto GetById(int id)
     {
       var timeCapsule = unitOfWork.TimeCapsules.GetById(id);
       var timeCapsuleDto = new TimeCapsuleMapper().TimeCapsuleToTimeCapsuleDto(timeCapsule);
