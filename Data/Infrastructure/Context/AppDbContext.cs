@@ -20,6 +20,20 @@ public class AppDbContext : DbContext, IAppDbContext
             e.Property(a => a.Password).IsRequired();
         });
         base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<TimeCapsule>()
+            .HasMany(t => t.Attachments)
+            .WithOne(a => a.TimeCapsule)
+            .HasForeignKey(a => a.TimeCapsuleId);
+        modelBuilder.Entity<Attachment>()
+            .HasKey(a => a.Id);
+        modelBuilder.Entity<TimeCapsule>()
+            .HasKey(t => t.Id);
+        modelBuilder.Entity<Account>()
+            .HasMany(a => a.TimeCapsules)
+            .WithMany(t => t.Collaborators);
+            
     }
+    public DbSet<TimeCapsule> TimeCapsules { get; set; }
+    public DbSet<Attachment> Attachments { get; set; }
     public DbSet<Account> Accounts { get; set; }
 }

@@ -10,4 +10,5 @@ public class Account
     public string Email { get; set; }
     public Role Role { get; set; }
     public string ProfilePicture { get; set; }
+    public IEnumerable<TimeCapsule> TimeCapsules { get; set; }
 }
