@@ -31,7 +31,8 @@ public class AuthService : IAuthService
         {
             UserName = dto.UserName,
             Email = dto.Email,
-            Password = dto.Password
+            Password = dto.Password,
+            ProfilePicture = dto.ProfilePicture
         };
         unitOfWork.Accounts.Add(account);
         unitOfWork.SaveChanges();
