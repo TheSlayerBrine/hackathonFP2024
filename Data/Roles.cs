@@ -1,0 +1,7 @@
+﻿namespace Data;
+
+public enum Role
+{
+    User = 0,
+    Admin = 1
+}

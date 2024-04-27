@@ -1,0 +1,19 @@
+﻿version: "3.9"  # optional since v1.27.0
+services:
+  web_api:
+    image: hackathonfp/web-api
+    container_name: web-api
+    ports:
+      - "5050:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Acceptance
+    depends_on:
+      - sql
+  sql:
+    image: hackathonfp/web-db
+    container_name: web-db
+    ports: # not actually needed, because the two services are on the same network
+      - "8082:1433"
+    environment:
+      - ACCEPT_EULA=y
+      - SA_PASSWORD=Hash1234/
