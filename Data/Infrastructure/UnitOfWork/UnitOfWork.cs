@@ -1,5 +1,6 @@
 ﻿using Data.Infrastructure.Context;
 using Data.Repositories;
+using Data.Repositories.Attachments;
 using Data.Repositories.TimeCapsules;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,16 +10,18 @@ public class UnitOfWork : IUnitOfWork
 {
     private readonly IAppDbContext dbContext;
     
-    public UnitOfWork(IAppDbContext dbContext, IAccountRepository accountRepository, ITimeCapsuleRepository timeCapsuleRepository )
+    public UnitOfWork(IAppDbContext dbContext, IAccountRepository accountRepository, ITimeCapsuleRepository timeCapsuleRepository, IAttachmentRepository attachmentRepository)
     {
         this.dbContext = dbContext;
         Accounts = accountRepository;
         TimeCapsules = timeCapsuleRepository;
+        Attachments = attachmentRepository;
     }
 
     
     public IAccountRepository Accounts { get; private set; }
     public ITimeCapsuleRepository TimeCapsules { get; private set; }
+    public IAttachmentRepository Attachments { get; private set; }
     
     public int SaveChanges()
     {

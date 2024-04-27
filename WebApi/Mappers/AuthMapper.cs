@@ -13,4 +13,5 @@ public static class AuthMapper
             Password = model.Password
         };
     }
+   
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.Services.Common.Auth;
+using WebApi.Mappers;
 using WebApi.Models;
 
 namespace WebApi.Controllers;
@@ -18,10 +19,14 @@ public class AuthController : BaseController
     }
 
     [HttpPost("register")]
-    public ActionResult<AccountModel> CreateAccount()
+    public ActionResult<AccountModel> CreateAccount(RegisterRequest model)
     {
+        var accounntdto = new AccountMapper().RegisterRequestToUserDto(model);
+        authService.CreateAccount(accounntdto);
         return Ok();
     }
+    
+    [HttpPost("login")]
     public ActionResult<LoginResponse> Login(LoginRequest user)
     {
         var authTokensDto = authService.LoginAccount(user.Email, user.Password);

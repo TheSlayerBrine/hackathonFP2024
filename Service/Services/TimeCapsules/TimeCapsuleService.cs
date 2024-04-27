@@ -2,6 +2,7 @@
 using Data.Infrastructure.UnitOfWork;
 using Service.Exceptions;
 using Service.Mappers;
+using Service.Services.Attachments;
 
 namespace Service.Services.TimeCapsules;
 
@@ -30,7 +31,9 @@ public class TimeCapsuleService : ITimeCapsuleService
             throw new Exception("You can't open this capsule yet");
         }
         else
-        return timeCapsule.Attachments.ToList();
+        {
+            return timeCapsule.Attachments.ToList();
+        }
     }
 
     public void CreateTimeCapsule(CreateTimeCapsuleDto dto)
@@ -39,16 +42,23 @@ public class TimeCapsuleService : ITimeCapsuleService
         {
             throw new Exception("Parameters are not filled");
         }
-        unitOfWork.Attachments
+
+        foreach (var attachment in dto.Attachments)
+        {
+            unitOfWork.Attachments.Add(attachment);
+        }
+       
         var timeCapsule = new TimeCapsule
         {
             Description = dto.Description,
-            Title = dto.Titile,
+            Title = dto.Title,
             CreatedAt = DateTime.Now,
             OpenedAt = dto.OpenedAt,
             Type = dto.Type,
             WasOpened = false,
-            Attachments = dto.AttachmentUrls.ToList()
-        }
+            Attachments = dto.Attachments.ToList()
+        };
+        unitOfWork.TimeCapsules.Add(timeCapsule);
+        unitOfWork.SaveChanges();
     }
 }
