@@ -36,21 +36,24 @@ public class AuthService : IAuthService
         unitOfWork.Accounts.Add(account);
         unitOfWork.SaveChanges();
     }
-    public string LoginAccount(LoginDto dto)
+
+    public string LoginAccount(string email, string password)
     {
-        var account = unitOfWork.Accounts.GetByEmail(dto.Email);
+        var account = unitOfWork.Accounts.GetByEmail(email);
         if (account is null)
         {
             throw new LoginException("User doesn't exist");
         }
 
-        if (account.Email != dto.Email)
+        if (account.Email != email)
         {
             throw new LoginException("Credentials are not matching");
         }
 
         return GenerateJwt(account);
     }
+
+   
     private string GenerateJwt(Account account)
     {
         var securityKey = new SymmetricSecurityKey((Encoding.UTF8.GetBytes(config["Jwt:Key"])));

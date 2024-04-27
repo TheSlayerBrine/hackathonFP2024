@@ -7,5 +7,5 @@ namespace Service.Services.Common.Auth;
 public interface IAuthService
 {
     public void CreateAccount(UserDto dto);
-    public string LoginAccount(LoginDto dto);
+    public string LoginAccount(string email, string password);
 }
