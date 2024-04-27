@@ -31,5 +31,9 @@ public class TimeCapsuleService : ITimeCapsuleService
         else
         return timeCapsule.Attachments.ToList();
     }
-    
+
+    public void CreateTimeCapsule(CreateTimeCapsuleDto dto)
+    {
+        
+    }
 }
