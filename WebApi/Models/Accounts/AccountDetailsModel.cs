@@ -1,4 +1,4 @@
-﻿using Data;
+﻿using Data.Enums;
 
 namespace WebApi.Models;
 
