@@ -1,4 +1,5 @@
 ﻿using Data.Infrastructure.UnitOfWork;
+using Service.Mappers;
 
 namespace Service.Services.Accounts;
 
@@ -12,7 +13,13 @@ public class AccountService : IAccountService
     }
     public AccountDetailsDto GetDetails(int id)
     {
-        throw new NotImplementedException();
+        var account = unitOfWork.Accounts.Find(id);
+        if(account == null)
+        {
+            throw new Exception("Account not found");
+        }
+       var accountDetailsDto = new AccountMapper().AccountToAccountDetailsDto(account);
+       return accountDetailsDto;
     }
 
     public void UpdateUserName(int id, string newUserName)

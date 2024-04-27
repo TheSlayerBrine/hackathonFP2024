@@ -9,5 +9,4 @@ namespace Service.Mappers;
 public partial class AccountMapper
 {
     public partial AccountDetailsDto AccountToAccountDetailsDto(Account account);
-
 }

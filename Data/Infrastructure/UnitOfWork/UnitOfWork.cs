@@ -1,5 +1,6 @@
 ﻿using Data.Infrastructure.Context;
 using Data.Repositories;
+using Data.Repositories.TimeCapsules;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Infrastructure.UnitOfWork;
@@ -8,13 +9,16 @@ public class UnitOfWork : IUnitOfWork
 {
     private readonly IAppDbContext dbContext;
     
-    public UnitOfWork(IAppDbContext dbContext, IAccountRepository accountRepository)
+    public UnitOfWork(IAppDbContext dbContext, IAccountRepository accountRepository, ITimeCapsuleRepository timeCapsuleRepository )
     {
         this.dbContext = dbContext;
         Accounts = accountRepository;
+        TimeCapsules = timeCapsuleRepository;
     }
+
     
     public IAccountRepository Accounts { get; private set; }
+    public ITimeCapsuleRepository TimeCapsules { get; private set; }
     
     public int SaveChanges()
     {
