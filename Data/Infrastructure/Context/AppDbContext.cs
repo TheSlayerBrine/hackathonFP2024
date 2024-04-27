@@ -31,7 +31,6 @@ public class AppDbContext : DbContext, IAppDbContext
         modelBuilder.Entity<Account>()
             .HasMany(a => a.TimeCapsules)
             .WithMany(t => t.Collaborators);
-            
     }
     public DbSet<TimeCapsule> TimeCapsules { get; set; }
     public DbSet<Attachment> Attachments { get; set; }

@@ -5,7 +5,7 @@ namespace Data.Repositories;
 
 public interface IAccountRepository : IRepository<Account>
 {
-    Account GetById(int id);
-    Account GetByName(string nickname);
-    Account GetByEmail(string email);
+   public Account GetById(int id);
+   public Account GetByName(string nickname);
+    public Account GetByEmail(string email);
 }
