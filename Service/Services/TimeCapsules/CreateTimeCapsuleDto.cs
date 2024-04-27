@@ -8,4 +8,5 @@ public class CreateTimeCapsuleDto
     public string Description { get; set; }
     public Types Type { get; set; }
     public List<string> AttachmentUrls { get; set; }
+    public DateTime OpenedAt { get; set; }
 }

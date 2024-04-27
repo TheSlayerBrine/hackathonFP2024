@@ -1,5 +1,6 @@
 ﻿using Data.Entities;
 using Data.Infrastructure.UnitOfWork;
+using Service.Exceptions;
 using Service.Mappers;
 
 namespace Service.Services.TimeCapsules;
@@ -34,6 +35,20 @@ public class TimeCapsuleService : ITimeCapsuleService
 
     public void CreateTimeCapsule(CreateTimeCapsuleDto dto)
     {
-        
+        if (dto is null)
+        {
+            throw new Exception("Parameters are not filled");
+        }
+        unitOfWork.Attachments
+        var timeCapsule = new TimeCapsule
+        {
+            Description = dto.Description,
+            Title = dto.Titile,
+            CreatedAt = DateTime.Now,
+            OpenedAt = dto.OpenedAt,
+            Type = dto.Type,
+            WasOpened = false,
+            Attachments = dto.AttachmentUrls.ToList()
+        }
     }
 }
